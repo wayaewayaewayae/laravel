@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Rw;
 
-class kasus extends Model
+class Kasus extends Model
 {
-    use HasFactory;
+    public function Rw(){
+        return $this->belongsTo('App\Models\Rw','id_rw');
+    }
 }
