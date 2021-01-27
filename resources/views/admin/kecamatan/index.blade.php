@@ -13,9 +13,8 @@
                         <table class="table">
                             <tr>
                                 <th>No</th>
-                                <th>Kode Kota</th>
-                                <th>Kota</th>
                                 <th>Kecamatan</th>
+                                <th>Kota</th>
                                 <th>Aksi</th>
                             </tr>
                             @php $no=1; @endphp

@@ -18,7 +18,7 @@ class CreateRwsTable extends Migration
             $table->unsIgnedInteger('id_desa');
             $table->foreign('id_desa')->references('id')
             ->on('desas')->onDelete('cascade');
-            $table->string('nama_rw');
+            $table->string('no_rw');
             $table->timestamps();
         });
     }

@@ -8,6 +8,9 @@ use App\Models\Rw;
 
 class Kasus extends Model
 {
+    protected $fillable = ['positif','sembuh','meninggal','tanggal','id_kecamatan'];
+        public $timestamps = true;
+        
     public function Rw(){
         return $this->belongsTo('App\Models\Rw','id_rw');
     }

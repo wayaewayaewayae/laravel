@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">data provinsi </div>
+                <div class="card-header">data admin </div>
 
                 <div class="card-body">
                     @if (session('status'))
