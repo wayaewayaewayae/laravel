@@ -39,7 +39,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Tanggal</label>
-                                <input type="number" name="tanggal" value="{{$kasus->nama_rw}}" class="form-control" readonly>
+                                <input type="date" name="tanggal" value="{{$kasus->nama_rw}}" class="form-control" readonly>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn block">Simpan</button>

@@ -25,13 +25,12 @@
                             @foreach($kasus as $data)
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$data->rw->nama_rw}}</td>
-                                <td>{{$data->kasus->reaktif}}</td>
-                                <td>{{$data->kasus->positif}}</td>
-                                <td>{{$data->kasus->sembuh}}</td>
-                                <td>{{$data->kasus->meninggal}}</td>
-                                <td>{{$data->kasus->tanggal}}</td>
-                                <td>{{$data->kasus->Aksi}}</td>
+                                <td>{{$data->rw->no_rw}}</td>
+                                <td>{{$data->reaktif}}</td>
+                                <td>{{$data->positif}}</td>
+                                <td>{{$data->sembuh}}</td>
+                                <td>{{$data->meninggal}}</td>
+                                <td>{{$data->tanggal}}</td>
                                 <td>
                                     <form action="{{route('kasus.destroy', $data->id)}}" method="post">
                                         @csrf

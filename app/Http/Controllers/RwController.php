@@ -38,6 +38,9 @@ class RwController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'no_rw'=> 'required|alpha|min:3|max:30'
+        ]);
         $rw = new Rw();
         $rw->id_desa = $request->id_desa;
         $rw->no_rw = $request->no_rw;
@@ -81,6 +84,9 @@ class RwController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'no_rw'=> 'required|alpha|min:3|max:30'
+        ]);
         $rw = Rw::findOrFail($id);
         $rw->id_desa = $request->id_desa;
         $rw->no_rw = $request->no_rw;

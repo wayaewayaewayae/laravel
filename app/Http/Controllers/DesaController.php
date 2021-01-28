@@ -38,6 +38,9 @@ class DesaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_desa'=> 'required|alpha|min:3|max:30|unique:desa'
+        ]);
         $desa = new Desa();
         $desa->id_kecamatan = $request->id_kecamatan;
         $desa->nama_desa = $request->nama_desa;
@@ -81,6 +84,9 @@ class DesaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama_desa'=> 'required|alpha|min:3|max:30'
+        ]);
         $desa = Desa::findOrFail($id);
         $desa->id_kecamatan = $request->id_kecamatan;
         $desa->nama_desa = $request->nama_desa;
