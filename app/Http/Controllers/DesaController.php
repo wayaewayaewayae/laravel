@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class DesaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $desa = Desa::with('kecamatan')->get();
@@ -39,7 +39,10 @@ class DesaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_desa'=> 'required|alpha|min:3|max:30|unique:desa'
+            'nama_desa' => 'required|unique:desas'
+        ], [
+            'nama_desa.required' => 'Nama desa tidak boleh kosong',
+            'nama_desa.unique' => 'Nama desa sudah terdaftar'
         ]);
         $desa = new Desa();
         $desa->id_kecamatan = $request->id_kecamatan;
@@ -85,7 +88,10 @@ class DesaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_desa'=> 'required|alpha|min:3|max:30'
+            'nama_desa' => 'required|unique:desas'
+        ], [
+            'nama_desa.required' => 'Nama desa tidak boleh kosong',
+            'nama_desa.unique' => 'Nama desa sudah terdaftar'
         ]);
         $desa = Desa::findOrFail($id);
         $desa->id_kecamatan = $request->id_kecamatan;

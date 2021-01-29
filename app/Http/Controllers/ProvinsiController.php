@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class ProvinsiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $provinsi = Provinsi::all();
@@ -42,6 +42,7 @@ class ProvinsiController extends Controller
         ], [
             'kode_provinsi.required' => 'Kode Provinsi tidak boleh kosong',
             'kode_provinsi.max' => 'Kode maximal 3 karakter',
+            'kode_provinsi.unique' => 'kode Provinsi sudah terdaftar',
             'nama_provinsi.required' => 'Nama Provinsi tidak boleh kosong',
             'nama_provinsi.unique' => 'Nama Provinsi sudah terdaftar'
         ]);
@@ -92,6 +93,7 @@ class ProvinsiController extends Controller
         ], [
             'kode_provinsi.required' => 'Kode Provinsi tidak boleh kosong',
             'kode_provinsi.max' => 'Kode maximal 3 karakter',
+            'kode_provinsi.unique' => 'kode Provinsi sudah terdaftar',
             'nama_provinsi.required' => 'Nama Provinsi tidak boleh kosong',
             'nama_provinsi.unique' => 'Nama Provinsi sudah terdaftar'
         ]);

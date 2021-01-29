@@ -3,6 +3,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+            @if (session('message'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('message') }}
+                        </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         Edit Data Rw
@@ -23,7 +28,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="">No rw</label>
-                                <input type="number" name="no_rw" value="{{$rw->nama_desa}}" class="form-control" required>
+                                <input type="number" name="no_rw" value="{{$rw->no_rw}}" class="form-control" required>
+                                @if($errors->has('no_rw'))
+                                    <span class="text-danger">{{ $errors->first('no_rw') }}</span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn block">Simpan</button>

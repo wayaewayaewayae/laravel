@@ -4,8 +4,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="class-header">
-                  <b>  Data Provinsi</b> 
+                <div class="card-header">
+                    <b>Data Provinsi</b> 
                 <a href="{{route('provinsi.create')}}"  
                    class="btn btn-primary float-right">
                    Tambah

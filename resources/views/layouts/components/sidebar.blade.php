@@ -227,45 +227,45 @@
           </li>-->
          
               <li class="nav-item">
-                <a href="/provinsi" class="nav-link">
+              <a href="{{route('provinsi.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Provinsi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/kota" class="nav-link">
+              <a href="{{route('kota.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kota</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/kecamatan" class="nav-link">
+              <a href="{{route('kecamatan.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kecamatan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/desa" class="nav-link">
+              <a href="{{route('desa.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Kelurahan/Desa</p>
+                  <p>Desa/Kelurahan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/rw" class="nav-link">
+              <a href="{{route('rw.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rw</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/kasus" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+              <a href="{{route('kasus.index')}}" class="nav-link">
+              <i class="nc-icon nc-chart-bar-32"></i>
                   <p>Kasus</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/examples/contacts.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Contacts</p>
+                  <p>Dampak</p>
                 </a>
               </li>
             </ul>

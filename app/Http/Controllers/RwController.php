@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class RwController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $rw = rw::with('desa')->get();
@@ -39,7 +39,10 @@ class RwController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'no_rw'=> 'required|alpha|min:3|max:30'
+            'no_rw' => 'required|unique:rws'
+        ], [
+            'no_rw.required' => 'No rw tidak boleh kosong',
+            'no_rw.unique' => 'No rw sudah terdaftar'
         ]);
         $rw = new Rw();
         $rw->id_desa = $request->id_desa;
@@ -85,14 +88,17 @@ class RwController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'no_rw'=> 'required|alpha|min:3|max:30'
+            'no_rw' => 'required|unique:rws'
+        ], [
+            'no_rw.required' => 'No rw tidak boleh kosong',
+            'no_rw.unique' => 'No rw sudah terdaftar'
         ]);
         $rw = Rw::findOrFail($id);
         $rw->id_desa = $request->id_desa;
         $rw->no_rw = $request->no_rw;
         $rw->save();
         return redirect()->route('rw.index')
-            ->with(['success'=>'Data <b>', $rw->nama_rw, 
+            ->with(['success'=>'Data <b>', $rw->no_rw, 
             '</b> Berhasil di edit']);
     }
 

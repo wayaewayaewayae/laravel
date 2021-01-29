@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class KasusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $kasus = kasus::with('rw')->get();
@@ -84,6 +84,7 @@ class KasusController extends Controller
      */
     public function update(Request $request,$id)
     {
+        
         $kasus = new kasus();
         $kasus->id_rw = $request->id_rw;
         $kasus->reaktif = $request->reaktif;

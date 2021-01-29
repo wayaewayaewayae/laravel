@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class KotaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $kota = Kota::with('provinsi')->get();
@@ -44,6 +44,7 @@ class KotaController extends Controller
         ], [
             'kode_.required' => 'Kode kota tidak boleh kosong',
             'kode_kota.max' => 'Kode maximal 3 karakter',
+            'kode_kota.unique' => 'kode kota sudah terdaftar',
             'nama_kota.required' => 'Nama kota tidak boleh kosong',
             'nama_kota.unique' => 'Nama kota sudah terdaftar'
         ]);
@@ -97,6 +98,7 @@ class KotaController extends Controller
         ], [
             'kode_kota.required' => 'Kode kota tidak boleh kosong',
             'kode_kota.max' => 'Kode maximal 3 karakter',
+            'kode_kota.unique' => 'kode kota sudah terdaftar',
             'nama_kota.required' => 'Nama kota tidak boleh kosong',
             'nama_kota.unique' => 'Nama kota sudah terdaftar'
         ]);
