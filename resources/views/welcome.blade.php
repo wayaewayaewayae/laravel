@@ -6,6 +6,26 @@
 
         <title>Laravel</title>
 
+        <!-- Favicon -->
+        <link href="/assets/img/brand/favicon.png" rel="icon" type="image/png">
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+        <!-- Icons -->
+        <link href="/assets/vendor/nucleo/css/nucleo.min.css" rel="stylesheet">
+        <link href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+        <!-- Argon CSS -->
+        <link type="text/css" href="/assets/css/argon.min.css" rel="stylesheet">
+
+        <!-- Core -->
+        <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Argon JS -->
+        <script src="/assets/js/argon.min.js"></script>
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 

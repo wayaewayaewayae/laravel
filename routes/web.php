@@ -1,44 +1,46 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProvinsiController;
-use App\Http\Controllers\KotaController;
-use App\Http\Controllers\KecamatanController;
-use App\Http\Controllers\DesaController;
-use App\Http\Controllers\RwController;
-use App\Http\Controllers\KasusController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('dashboard',function () {
+    return view('layouts.master');
+});
+
+Auth::routes();
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes();
 
-Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('provinsi');
-Auth::routes();
+use App\Http\Controllers\ProvinsiController;
+Route::resource('provinsi', ProvinsiController::class);
 
-Route::group(['prefix' => 'admin', 'middleware'=>['auth']], function() {
-        Route::get('/', function()
-        {
-            return view('admin.index');
-        });
+use App\Http\Controllers\KotaController;
+Route::resource('kota', KotaController::class);
 
-        Route::resource('provinsi', ProvinsiController::class);
-        Route::resource('kota', KotaController::class);
-        Route::resource('kecamatan', KecamatanController::class);
-        Route::resource('desa', desaController::class);
-        Route::resource('rw', rwController::class);
-        Route::resource('kasus', kasusController::class);
- } );
+use App\Http\Controllers\KecamatanController;
+Route::resource('kecamatan', KecamatanController::class);
+
+use App\Http\Controllers\KelurahanController;
+Route::resource('kelurahan', KelurahanController::class);
+
+use App\Http\Controllers\RwController;
+Route::resource('rw', RwController::class);
+
+use App\Http\Controllers\Kasus2Controller;
+Route::resource('kasus2', Kasus2Controller::class);
+
+use App\Http\Controllers\NegaraController;
+Route::resource('negara', NegaraController::class);
+
+use App\Http\Controllers\KasusController;
+Route::resource('kasus', KasusController::class);
+
+// livewire
+
+Route::view('states-city','livewire.home');

@@ -1,121 +1,65 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\provinsi;
+use App\Controllers\DB;
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 
 class ProvinsiController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        $provinsi = Provinsi::all();
-        return view('admin.provinsi.index', compact('provinsi'));
+       $provinsi = Provinsi::all();
+       return view('provinsi.index', compact('provinsi'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('admin.provinsi.create');
+        $provinsi = Provinsi::all();
+        return view('provinsi.create' ,compact('provinsi'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'kode_provinsi' => 'required|max:3',
+            'kode_provinsi' => 'required|max:3|unique:provinsis',
             'nama_provinsi' => 'required|unique:provinsis'
         ], [
-            'kode_provinsi.required' => 'Kode Provinsi tidak boleh kosong',
+            'kode_provinsi.required' => 'Kode provinsi tidak boleh Kosong',
             'kode_provinsi.max' => 'Kode maximal 3 karakter',
-            'kode_provinsi.unique' => 'kode Provinsi sudah terdaftar',
-            'nama_provinsi.required' => 'Nama Provinsi tidak boleh kosong',
-            'nama_provinsi.unique' => 'Nama Provinsi sudah terdaftar'
+            'kode_provinsi.unique' => 'Kode provinsi sudah terdaftar',
+            'nama_provinsi.required' => 'Nama provinsi tIdak boleh kosong',
+
+        
         ]);
-        $provinsi = new Provinsi();
+
+        $provinsi = new Provinsi;
         $provinsi->kode_provinsi = $request->kode_provinsi;
         $provinsi->nama_provinsi = $request->nama_provinsi;
         $provinsi->save();
-        return redirect()->route('provinsi.index')->with(['succress'=>'Data <b>',$provinsi->nama_provinsi,
-        '</b> berhasil di input']);
+        return redirect()->route('provinsi.index')->with(['message' => 'Data Provinsi Berhasil disimpan']);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\provinsi  $provinsi
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $provinsi = Provinsi::findOrfail($id);
-        return view('admin.provinsi.show', compact('provinsi'));
+        $provinsi = Provinsi::findOrFail($id);
+        return view('provinsi.show', compact('provinsi'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\provinsi  $provinsi
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $provinsi = Provinsi::findOrFail($id);
-        return view('admin.provinsi.edit', compact('provinsi'));
+        return view('provinsi.edit', compact('provinsi'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\provinsi  $provinsi
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'kode_provinsi' => 'required|max:3',
-            'nama_provinsi' => 'required|unique:provinsis'
-        ], [
-            'kode_provinsi.required' => 'Kode Provinsi tidak boleh kosong',
-            'kode_provinsi.max' => 'Kode maximal 3 karakter',
-            'kode_provinsi.unique' => 'kode Provinsi sudah terdaftar',
-            'nama_provinsi.required' => 'Nama Provinsi tidak boleh kosong',
-            'nama_provinsi.unique' => 'Nama Provinsi sudah terdaftar'
-        ]);
         $provinsi = Provinsi::findOrFail($id);
         $provinsi->kode_provinsi = $request->kode_provinsi;
-        $provinsi->nama_provinsi = $request->kode_provinsi;
+        $provinsi->nama_provinsi = $request->nama_provinsi;
         $provinsi->save();
-        return redirect()->route('provinsi.index')->with(['succes'=>'Data <b>', $provinsi->nama_provinsi,
-        '<b> Berhasil di edit']);
+        return redirect()->route('provinsi.index')->with(['message' => 'Data Provinsi Berhasil diedit']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\provinsi  $provinsi
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $provinsi = provinsi::findOrfail($id);
+        $provinsi = Provinsi::findOrFail($id);
         $provinsi->delete();
-        return redirect()->route('provinsi.index')->with(['succes'=>'Data <b>', $provinsi->nama_provinsi,
-        '<b> berhasil dihapus']);
+        return redirect()->route('provinsi.index')->with(['message' => 'Data provinsi Berhasil dihapus']);
     }
 }

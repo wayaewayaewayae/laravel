@@ -1,15 +1,15 @@
-/*! KeyTable 2.5.3
- * ©2009-2020 SpryMedia Ltd - datatables.net/license
+/*! KeyTable 2.5.0
+ * ©2009-2018 SpryMedia Ltd - datatables.net/license
  */
 
 /**
  * @summary     KeyTable
  * @description Spreadsheet like keyboard navigation for DataTables
- * @version     2.5.3
+ * @version     2.5.0
  * @file        dataTables.keyTable.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
- * @copyright   Copyright 2009-2020 SpryMedia Ltd.
+ * @copyright   Copyright 2009-2018 SpryMedia Ltd.
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -49,8 +49,6 @@
 }(function( $, window, document, undefined ) {
 'use strict';
 var DataTable = $.fn.dataTable;
-var namespaceCounter = 0;
-var editorNamespaceCounter = 0;
 
 
 var KeyTable = function ( dt, opts ) {
@@ -82,13 +80,7 @@ var KeyTable = function ( dt, opts ) {
 		waitingForDraw: false,
 
 		/** @type {object} Information about the last cell that was focused */
-		lastFocus: null,
-
-		/** @type {string} Unique namespace per instance */
-		namespace: '.keyTable-'+(namespaceCounter++),
-
-		/** @type {Node} Input element for tabbing into the table */
-		tabInput: null
+		lastFocus: null
 	};
 
 	// DOM items
@@ -175,8 +167,6 @@ $.extend( KeyTable.prototype, {
 		var that = this;
 		var dt = this.s.dt;
 		var table = $( dt.table().node() );
-		var namespace = this.s.namespace;
-		var editorBlock = false;
 
 		// Need to be able to calculate the cell positions relative to the table
 		if ( table.css('position') === 'static' ) {
@@ -184,7 +174,7 @@ $.extend( KeyTable.prototype, {
 		}
 
 		// Click to focus
-		$( dt.table().body() ).on( 'click'+namespace, 'th, td', function (e) {
+		$( dt.table().body() ).on( 'click.keyTable', 'th, td', function (e) {
 			if ( that.s.enable === false ) {
 				return;
 			}
@@ -199,15 +189,13 @@ $.extend( KeyTable.prototype, {
 		} );
 
 		// Key events
-		$( document ).on( 'keydown'+namespace, function (e) {
-			if ( ! editorBlock ) {
-				that._key( e );
-			}
+		$( document ).on( 'keydown.keyTable', function (e) {
+			that._key( e );
 		} );
 
 		// Click blur
 		if ( this.c.blurable ) {
-			$( document ).on( 'mousedown'+namespace, function ( e ) {
+			$( document ).on( 'mousedown.keyTable', function ( e ) {
 				// Click on the search input will blur focus
 				if ( $(e.target).parents( '.dataTables_filter' ).length ) {
 					that._blur();
@@ -245,27 +233,27 @@ $.extend( KeyTable.prototype, {
 				if ( mode !== 'inline' && that.s.enable ) {
 					that.enable( false );
 
-					editor.one( 'close'+namespace, function () {
+					editor.one( 'close.keyTable', function () {
 						that.enable( true );
 					} );
 				}
 			} );
 
 			if ( this.c.editOnFocus ) {
-				dt.on( 'key-focus'+namespace+' key-refocus'+namespace, function ( e, dt, cell, orig ) {
+				dt.on( 'key-focus.keyTable key-refocus.keyTable', function ( e, dt, cell, orig ) {
 					that._editor( null, orig, true );
 				} );
 			}
 
 			// Activate Editor when a key is pressed (will be ignored, if
 			// already active).
-			dt.on( 'key'+namespace, function ( e, dt, key, cell, orig ) {
+			dt.on( 'key.keyTable', function ( e, dt, key, cell, orig ) {
 				that._editor( key, orig, false );
 			} );
 
 			// Active editing on double click - it will already have focus from
 			// the click event handler above
-			$( dt.table().body() ).on( 'dblclick'+namespace, 'th, td', function (e) {
+			$( dt.table().body() ).on( 'dblclick.keyTable', 'th, td', function (e) {
 				if ( that.s.enable === false ) {
 					return;
 				}
@@ -276,50 +264,28 @@ $.extend( KeyTable.prototype, {
 					return;
 				}
 
-				if ( that.s.lastFocus && this !== that.s.lastFocus.cell.node() ) {
-					return;
-				}
-
 				that._editor( null, e, true );
 			} );
-
-			// While Editor is busy processing, we don't want to process any key events
-			editor
-				.on('preSubmit', function () {
-					editorBlock = true;
-				} )
-				.on('preSubmitCancelled', function () {
-					editorBlock = false;
-				} )
-				.on('submitComplete', function () {
-					editorBlock = false;
-				} );
 		}
 
 		// Stave saving
 		if ( dt.settings()[0].oFeatures.bStateSave ) {
-			dt.on( 'stateSaveParams'+namespace, function (e, s, d) {
+			dt.on( 'stateSaveParams.keyTable', function (e, s, d) {
 				d.keyTable = that.s.lastFocus ?
 					that.s.lastFocus.cell.index() :
 					null;
 			} );
 		}
 
-		dt.on( 'column-visibility'+namespace, function (e) {
-			that._tabInput();
-		} );
-
 		// Redraw - retain focus on the current cell
-		dt.on( 'draw'+namespace, function (e) {
-			that._tabInput();
-
+		dt.on( 'draw.keyTable', function (e) {
 			if ( that.s.focusDraw ) {
 				return;
 			}
 
 			var lastFocus = that.s.lastFocus;
 
-			if ( lastFocus ) {
+			if ( lastFocus && lastFocus.node && $(lastFocus.node).closest('body') === document.body ) {
 				var relative = that.s.lastFocus.relative;
 				var info = dt.page.info();
 				var row = relative.row + info.start;
@@ -342,21 +308,14 @@ $.extend( KeyTable.prototype, {
 			this._clipboard();
 		}
 
-		dt.on( 'destroy'+namespace, function () {
-			that._blur( true );
-
-			// Event tidy up
-			dt.off( namespace );
-
-			$( dt.table().body() )
-				.off( 'click'+namespace, 'th, td' )
-				.off( 'dblclick'+namespace, 'th, td' );
-
+		dt.on( 'destroy.keyTable', function () {
+			dt.off( '.keyTable' );
+			$( dt.table().body() ).off( 'click.keyTable', 'th, td' );
 			$( document )
-				.off( 'mousedown'+namespace )
-				.off( 'keydown'+namespace )
-				.off( 'copy'+namespace )
-				.off( 'paste'+namespace );
+				.off( 'keydown.keyTable' )
+				.off( 'click.keyTable' )
+				.off( 'copy.keyTable' )
+				.off( 'paste.keyTable' );
 		} );
 
 		// Initial focus comes from state or options
@@ -386,10 +345,9 @@ $.extend( KeyTable.prototype, {
 	/**
 	 * Blur the control
 	 *
-	 * @param {boolean} [noEvents=false] Don't trigger updates / events (for destroying)
 	 * @private
 	 */
-	_blur: function (noEvents)
+	_blur: function ()
 	{
 		if ( ! this.s.enable || ! this.s.lastFocus ) {
 			return;
@@ -400,11 +358,9 @@ $.extend( KeyTable.prototype, {
 		$( cell.node() ).removeClass( this.c.className );
 		this.s.lastFocus = null;
 
-		if ( ! noEvents ) {
-			this._updateFixedColumns(cell.index().column);
+		this._updateFixedColumns(cell.index().column);
 
-			this._emitEvent( 'key-blur', [ this.s.dt, cell ] );
-		}
+		this._emitEvent( 'key-blur', [ this.s.dt, cell ] );
 	},
 
 
@@ -416,14 +372,13 @@ $.extend( KeyTable.prototype, {
 	_clipboard: function () {
 		var dt = this.s.dt;
 		var that = this;
-		var namespace = this.s.namespace;
 
 		// IE8 doesn't support getting selected text
 		if ( ! window.getSelection ) {
 			return;
 		}
 
-		$(document).on( 'copy'+namespace, function (ejq) {
+		$(document).on( 'copy.keyTable', function (ejq) {
 			var e = ejq.originalEvent;
 			var selection = window.getSelection().toString();
 			var focused = that.s.lastFocus;
@@ -439,7 +394,7 @@ $.extend( KeyTable.prototype, {
 			}
 		} );
 
-		$(document).on( 'paste'+namespace, function (ejq) {
+		$(document).on( 'paste.keyTable', function (ejq) {
 			var e = ejq.originalEvent;
 			var focused = that.s.lastFocus;
 			var activeEl = document.activeElement;
@@ -508,16 +463,10 @@ $.extend( KeyTable.prototype, {
 	 */
 	_editor: function ( key, orig, hardEdit )
 	{
-		// If nothing focused, we can't take any action
-		if (! this.s.lastFocus) {
-			return;	
-		}
-
 		var that = this;
 		var dt = this.s.dt;
 		var editor = this.c.editor;
 		var editCell = this.s.lastFocus.cell;
-		var namespace = this.s.namespace + 'e' + editorNamespaceCounter++;
 
 		// Do nothing if there is already an inline edit in this cell
 		if ( $('div.DTE', editCell.node()).length ) {
@@ -546,9 +495,9 @@ $.extend( KeyTable.prototype, {
 
 		var editInline = function () {
 			editor
-				.one( 'open'+namespace, function () {
+				.one( 'open.keyTable', function () {
 					// Remove cancel open
-					editor.off( 'cancelOpen'+namespace );
+					editor.off( 'cancelOpen.keyTable' );
 
 					// Excel style - select all text
 					if ( ! hardEdit ) {
@@ -559,8 +508,8 @@ $.extend( KeyTable.prototype, {
 					dt.keys.enable( hardEdit ? 'tab-only' : 'navigation-only' );
 
 					// On blur of the navigation submit
-					dt.on( 'key-blur.editor', function (e, dt, cell) {
-						if ( editor.displayed() && cell.node() === editCell.node() ) {
+					dt.on( 'key-blur.editor', function () {
+						if ( editor.displayed() ) {
 							editor.submit();
 						}
 					} );
@@ -570,29 +519,22 @@ $.extend( KeyTable.prototype, {
 						$( dt.table().container() ).addClass('dtk-focus-alt');
 					}
 
-					// If the dev cancels the submit, we need to return focus
-					editor.on( 'preSubmitCancelled'+namespace, function () {
-						setTimeout( function () {
-							that._focus( editCell, null, false );
-						}, 50 );
-					} );
-
-					editor.on( 'submitUnsuccessful'+namespace, function () {
+					editor.on( 'submitUnsuccessful.keyTable', function () {
 						that._focus( editCell, null, false );
 					} );
 
 					// Restore full key navigation on close
-					editor.one( 'close'+namespace, function () {
+					editor.one( 'close', function () {
 						dt.keys.enable( true );
 						dt.off( 'key-blur.editor' );
-						editor.off( namespace );
+						editor.off( '.keyTable' );
 						$( dt.table().container() ).removeClass('dtk-focus-alt');
 					} );
 				} )
-				.one( 'cancelOpen'+namespace, function () {
+				.one( 'cancelOpen.keyTable', function () {
 					// `preOpen` can cancel the display of the form, so it
 					// might be that the open event handler isn't needed
-					editor.off( namespace );
+					editor.off( '.keyTable' );
 				} )
 				.inline( editCell.index() );
 		};
@@ -727,9 +669,6 @@ $.extend( KeyTable.prototype, {
 			this._blur();
 		}
 
-		// Clear focus from other tables
-		this._removeOtherFocus();
-
 		var node = $( cell.node() );
 		node.addClass( this.c.className );
 
@@ -790,12 +729,6 @@ $.extend( KeyTable.prototype, {
 		// If not focused, then there is no key action to take
 		var lastFocus = this.s.lastFocus;
 		if ( ! lastFocus ) {
-			return;
-		}
-
-		// And the last focus still exists!
-		if ( ! this.s.dt.cell(lastFocus.node).any() ) {
-			this.s.lastFocus = null;
 			return;
 		}
 
@@ -868,13 +801,6 @@ $.extend( KeyTable.prototype, {
 				}
 				break;
 
-			case 113: // F2 - Excel like hard edit
-				if ( this.c.editor ) {
-					this._editor(null, e, true);
-					break;
-				}
-				// else fallthrough
-
 			default:
 				// Everything else - pass through only when fully enabled
 				if ( enable === true ) {
@@ -884,19 +810,6 @@ $.extend( KeyTable.prototype, {
 		}
 	},
 
-	/**
-	 * Remove focus from all tables other than this one
-	 */
-	_removeOtherFocus: function ()
-	{
-		var thisTable = this.s.dt.table().node();
-
-		$.fn.dataTable.tables({api:true}).iterator('table', function (settings) {
-			if (this.table().node() !== thisTable) {
-				this.cell.blur();
-			}
-		});
-	},
 
 	/**
 	 * Scroll a container to make a cell visible in it. This can be used for
@@ -1018,19 +931,16 @@ $.extend( KeyTable.prototype, {
 			row++;
 		}
 
-		if ( row >= 0 && row < rows && $.inArray( column, columns ) !== -1 ) {
-			if (e) {
-				e.preventDefault();
-			}
+		if ( row >= 0 && row < rows && $.inArray( column, columns ) !== -1
+		) {
+			e.preventDefault();
 
 			this._focus( row, column, true, e );
 		}
 		else if ( ! keyBlurable || ! this.c.blurable ) {
 			// No new focus, but if the table isn't blurable, then don't loose
 			// focus
-			if (e) {
-				e.preventDefault();
-			}
+			e.preventDefault();
 		}
 		else {
 			this._blur();
@@ -1039,8 +949,8 @@ $.extend( KeyTable.prototype, {
 
 
 	/**
-	 * Create and insert a hidden input element that can receive focus on behalf
-	 * of the table
+	 * Create a hidden input element that can receive focus on behalf of the
+	 * table
 	 *
 	 * @private
 	 */
@@ -1056,32 +966,20 @@ $.extend( KeyTable.prototype, {
 			return;
 		}
 
-		// Only create the input element once on first class
-		if (! this.s.tabInput) {
-			var div = $('<div><input type="text" tabindex="'+tabIndex+'"/></div>')
-				.css( {
-					position: 'absolute',
-					height: 1,
-					width: 0,
-					overflow: 'hidden'
-				} );
+		var div = $('<div><input type="text" tabindex="'+tabIndex+'"/></div>')
+			.css( {
+				position: 'absolute',
+				height: 1,
+				width: 0,
+				overflow: 'hidden'
+			} )
+			.insertBefore( dt.table().node() );
 
-			div.children().on( 'focus', function (e) {
-				var cell = dt.cell(':eq(0)', that._columns(), {page: 'current'});
-	
-				if ( cell.any() ) {
-					that._focus( cell, null, true, e );
-				}
-			} );
-
-			this.s.tabInput = div;
-		}
-
-		// Insert the input element into the first cell in the table's body
-		var cell = this.s.dt.cell(':eq(0)', '0:visible', {page: 'current', order: 'current'}).node();
-		if (cell) {
-			$(cell).prepend(this.s.tabInput);
-		}
+		div.children().on( 'focus', function (e) {
+			if ( dt.cell(':eq(0)', {page: 'current'}).any() ) {
+				that._focus( dt.cell(':eq(0)', '0:visible', {page: 'current'}), null, true, e );
+			}
+		} );
 	},
 
 	/**
@@ -1180,7 +1078,7 @@ KeyTable.defaults = {
 
 
 
-KeyTable.version = "2.5.3";
+KeyTable.version = "2.5.0";
 
 
 $.fn.dataTable.KeyTable = KeyTable;
@@ -1215,14 +1113,6 @@ DataTable.Api.register( 'keys.enable()', function ( opts ) {
 	return this.iterator( 'table', function (ctx) {
 		if ( ctx.keytable ) {
 			ctx.keytable.enable( opts === undefined ? true : opts );
-		}
-	} );
-} );
-
-DataTable.Api.register( 'keys.move()', function ( dir ) {
-	return this.iterator( 'table', function (ctx) {
-		if ( ctx.keytable ) {
-			ctx.keytable._shift( null, dir, false );
 		}
 	} );
 } );

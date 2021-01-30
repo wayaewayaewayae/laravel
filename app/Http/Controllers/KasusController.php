@@ -1,113 +1,62 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Controller\DB;
-use App\Models\kasus;
-use App\Models\rw;
+use App\Controllers\DB;
+use App\Models\Negara;
+use App\Models\Kasus;
 use Illuminate\Http\Request;
 
-class KasusController extends Controller
-{
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+class KasusController extends Controller{
     
     public function index()
     {
-        $kasus = kasus::with('rw')->get();
-        return view('admin.kasus.index', compact('kasus'));
+        $kasus = Kasus::with('negara')->get();
+        return view('kasus.index', compact('kasus'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $kasus = Rw::all();
-        return view('admin.kasus.create', compact('kasus'));
+        $negara = Negara::all();
+        return view ('kasus.create', compact('negara'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-         $kasus = new kasus();
-        $kasus->id_rw = $request->id_rw;
-        $kasus->reaktif = $request->reaktif;
-        $kasus->positif = $request->positif;
-        $kasus->sembuh = $request->sembuh;
-        $kasus->meninggal = $request->meninggal;
+        $kasus = new Kasus;
+        $kasus->id_negara = $request->id_negara;
+        $kasus->jumlah_positif = $request->jumlah_positif;
+        $kasus->jumlah_meninggal = $request->jumlah_meninggal;
+        $kasus->jumlah_sembuh = $request->jumlah_sembuh;
         $kasus->tanggal = $request->tanggal;
         $kasus->save();
-        return redirect()->route('kasus.index')
-            ->with(['success'=>'Data Berhasil di input']);
+        return redirect()->route('kasus.index')->with(['message' => 'Data Kasus Berhasil disimpan']);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\kasus  $kasus
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $kasus = kasus::findOrFail($id);
-        return view('admin.kasus.show', compact('kasus'));
+        $kasus = Kasus::findOrFail($id);
+        return view('kasus.show', compact('kasus'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\kasus  $kasus
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $rw = Rw::all();
-        $kasus = kasus::findOrFail($id);
-        return view('admin.kasus.edit', compact('kasus', 'rw'));
+        $kasus = Kasus::findOrFail($id);
+        $negara = Negara::all();
+        return view('kasus.edit', compact('kasus', 'negara'))->with(['message' => 'Data Kasus Berhasil diedit']);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\kasus  $kasus
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        
-        $kasus = new kasus();
-        $kasus->id_rw = $request->id_rw;
-        $kasus->reaktif = $request->reaktif;
-        $kasus->positif = $request->positif;
-        $kasus->sembuh = $request->sembuh;
-        $kasus->meninggal = $request->meninggal;
+        $kasus = Kasus::findOrFail($id);
+        $kasus->id_negara = $request->id_negara;
+        $kasus->jumlah_positif = $request->jumlah_positif;
+        $kasus->jumlah_meninggal = $request->jumlah_meninggal;
+        $kasus->jumlah_sembuh = $request->jumlah_sembuh;
         $kasus->tanggal = $request->tanggal;
         $kasus->save();
-        return redirect()->route('kasus.index')
-            ->with(['success'=>'Data Berhasil di input']);
+        return redirect()->route('kasus.index')->with(['message' => 'Data Kasus Berhasil disimpan']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\kasus  $kasus
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $kasus = kasus::findOrFail($id);
+        $kasus = Kasus::findOrFail($id);
         $kasus->delete();
-        return redirect()->route('kasus.index')
-            ->with(['success'=>'Data Berhasil di hapus']);
+        return redirect()->route('kasus.index')->with(['message' => 'Data Kasus Berhasil diHapus']);
     }
 }
+
