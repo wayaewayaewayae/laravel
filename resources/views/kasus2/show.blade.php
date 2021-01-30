@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-11">
             <div class="card">
-                <div class="card-header"><center><b>{{ __('Data Kasus Negara') }}</b></center></div>
+                <div class="card-header"><center><b>{{ __('Data Kasus Local') }}</b></center></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -31,7 +31,7 @@
                         <input type="date" name="tanggal"  value="{{$kasus2->tanggal}}" class="form-control" id="" readonly>
                     </div>
                          <div class ="form-group">
-                            <a href="{{route('provinsi.index')}}" class = "btn btn-primary btn-primary btn-block">Kembali</a>
+                            <a href="{{route('kasus2.index')}}" class = "btn btn-primary btn-primary btn-block">Kembali</a>
                     </div>
                 </div>
             </div>

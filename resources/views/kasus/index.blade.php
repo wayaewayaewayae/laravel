@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-20">
             <div class="card">
-                <div class="card-header"><center><b>{{ __('Data Kasus Negara') }}</b></center></div>
+                <div class="card-header"><center><b>{{ __('Data Kasus') }}</b></center></div>
 
                 <div class="card-body">
                 <a href="{{route('kasus.create')}}"class="btn btn-outline-success float-right"><b>Tambah Data(+)</b></a>

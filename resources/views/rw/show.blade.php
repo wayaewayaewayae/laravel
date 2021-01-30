@@ -22,7 +22,7 @@
                         <input type="text" value="{{$rw->nama_rw}}" name="nama_rw" class="form-control" id="" readonly>
                     </div>
                         <div class ="form-group">
-                        <a href="{{route('provinsi.index')}}" class = "btn btn-primary btn-primary btn-block">Kembali</a>
+                        <a href="{{route('rw.index')}}" class = "btn btn-primary btn-primary btn-block">Kembali</a>
                     </div>
                 </div>
             </div>

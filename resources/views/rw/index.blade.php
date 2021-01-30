@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-15">
             <div class="card">
                 <div class="card-header"><center><b>{{ __('Data Rw') }}</b></center></div>
 
@@ -35,9 +35,9 @@
                                 @csrf
                                 @method('DELETE')
                           <td>
-                              <a href="{{route('rw.show', $data->id)}}" class="btn btn-success">Show</a>
-                              <a href="{{route('rw.edit', $data->id)}}" class="btn btn-warning">Edit</a>
-                              <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ?')">Hapus</button>
+                              <a href="{{route('rw.show', $data->id)}}" class="btn btn-success">Show <i class="far fa-eye"></i></a>
+                              <a href="{{route('rw.edit', $data->id)}}" class="btn btn-warning">Edit <i class="far fa-edit"></i></a>
+                              <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ?')">Hapus <i class="far fa-trash-alt"></i></button>
                         </td>
                       </tr>
                           </form>
