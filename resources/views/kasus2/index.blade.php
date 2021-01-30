@@ -17,8 +17,9 @@
 
                   <table class="table">
                     <thead>
-                      <tr>
+                      <tr class="bg-black">
                         <th scope="col">No</th>
+                        <th scope="col">Lokasi</th>
                         <th scope="col">Rw</th>
                         <th scope="col">Jumlah Positif</th>
                         <th scope="col">Jumlah Meninggal</th>
@@ -32,6 +33,12 @@
                     @foreach($kasus2 as $data)
                       <tr>
                         <th scope="row">{{$no++}}</th>
+                        <td>
+                        <br>Provinsi : {{$data->rw->kelurahan->kecamatan->kota->provinsi->nama_provinsi}}</br>
+                        <br>Kota : {{$data->rw->kelurahan->kecamatan->kota->nama_kota}}</br>
+                        <br>Kecamatan : {{$data->rw->kelurahan->kecamatan->nama_kecamatan}}</br>
+                        <br>Kelurahan :{{$data->rw->kelurahan->nama_kelurahan}}</br>
+                        </td>
                         <td>{{$data->rw->nama}}</td>
                         <td>{{$data->jumlah_positif}}</td>
                         <td>{{$data->jumlah_meninggal}}</td>
