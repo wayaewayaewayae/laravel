@@ -13,13 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <div class="mb-3">
+            
+                <div class="mb-3">
                         <label for="" class="form-label">Kelurahan</label>
-                        <input type="text" value="{{$kelurahan->nama_kelurahan}}" name="kelurahan" class="form-control" id="" readonly>
+                        <input type="text" name="nama_kelurahan"  value="{{$rw->kelurahan->nama_kelurahan}}" class="form-control" id="" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Rw</label>
-                        <input type="text" value="{{$rw->nama_rw}}" name="nama_rw" class="form-control" id="" readonly>
+                        <input type="number" name="nama_rw"  value="{{$rw->nama_rw}}" class="form-control" id="" readonly>
+                    </div>
                     </div>
                         <div class ="form-group">
                         <a href="{{route('rw.index')}}" class = "btn btn-primary btn-primary btn-block">Kembali</a>

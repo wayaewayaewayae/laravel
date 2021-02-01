@@ -9,6 +9,7 @@
 
                 <div class="card-body">
                 <a href="{{route('kasus2.create')}}"class="btn btn-primary float-right"><b>Tambah Data  <i class="fas fa-plus-circle"></i></b></a>
+                <br></br>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -16,11 +17,13 @@
                     @endif
 
                   <table class="table">
+                  <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr class="bg-black">
                         <th scope="col">No</th>
                         <th scope="col">Lokasi</th>
                         <th scope="col">Rw</th>
+                        <th scope="col">Jumlah reaktif</th>
                         <th scope="col">Jumlah Positif</th>
                         <th scope="col">Jumlah Meninggal</th>
                         <th scope="col">Jumlah Sembuh</th>
@@ -39,7 +42,8 @@
                         <br>Kecamatan : {{$data->rw->kelurahan->kecamatan->nama_kecamatan}}</br>
                         <br>Kelurahan :{{$data->rw->kelurahan->nama_kelurahan}}</br>
                         </td>
-                        <td>{{$data->rw->nama}}</td>
+                        <td>{{$data->rw->nama_rw}}</td>
+                        <td>{{$data->jumlah_reaktif}}</td>
                         <td>{{$data->jumlah_positif}}</td>
                         <td>{{$data->jumlah_meninggal}}</td>
                         <td>{{$data->jumlah_sembuh}}</td>

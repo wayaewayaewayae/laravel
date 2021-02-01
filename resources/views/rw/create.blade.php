@@ -26,7 +26,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Rw</label>
-                        <input type="text" name="nama_rw" class="form-control" id="">
+                        <input type="number" name="nama_rw" class="form-control" id="">
                     @if($errors->has('nama_rw'))
                         <span class="text-danger">{{ $errors->first('nama_rw') }}</span>
                     @endif

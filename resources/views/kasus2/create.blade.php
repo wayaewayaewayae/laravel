@@ -22,6 +22,11 @@
                         </div>
                     @endif
                     
+                
+                    <div class="mb-3">
+                        <label for="" class="form-label">Jumlah Reaktif</label>
+                        <input type="number" name="jumlah_reaktif" class="form-control" id="">
+                    </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Jumlah Positif</label>
                         <input type="number" name="jumlah_positif" class="form-control" id="">

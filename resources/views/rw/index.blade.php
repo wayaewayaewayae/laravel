@@ -30,7 +30,7 @@
                       <tr>
                         <th scope="row">{{$no++}}</th>
                         <td>{{$data->kelurahan->nama_kelurahan}}</td>
-                        <td>{{$data->nama}}</td>
+                        <td>{{$data->nama_rw}}</td>
                         <form action="{{route('rw.destroy', $data->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')

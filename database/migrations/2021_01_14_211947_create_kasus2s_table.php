@@ -18,6 +18,7 @@ class CreateKasus2sTable extends Migration
             $table->unsignedInteger('id_rw');
             $table->foreign('id_rw') ->references('id')->on('rws')
                   ->onDelete('cascade')->onUpdate('cascade');
+            $table->string('jumlah_reaktif');
             $table->string('jumlah_positif');
             $table->string('jumlah_meninggal');
             $table->string('jumlah_sembuh');

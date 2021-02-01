@@ -23,6 +23,7 @@ class Kasus2Controller extends Controller
     {
         $kasus2 = new Kasus2;
         $kasus2->id_rw = $request->id_rw;
+        $kasus2->jumlah_reaktif = $request->jumlah_reaktif;
         $kasus2->jumlah_positif = $request->jumlah_positif;
         $kasus2->jumlah_meninggal = $request->jumlah_meninggal;
         $kasus2->jumlah_sembuh = $request->jumlah_sembuh;
@@ -45,6 +46,7 @@ class Kasus2Controller extends Controller
     {
         $kasus2 = Kasus2::findOrFail($id);
         $kasus2->id_rw = $request->id_rw;
+        $kasus2->jumlah_reaktif = $request->jumlah_reaktif;
         $kasus2->jumlah_positif = $request->jumlah_positif;
         $kasus2->jumlah_meninggal = $request->jumlah_meninggal;
         $kasus2->jumlah_sembuh = $request->jumlah_sembuh;

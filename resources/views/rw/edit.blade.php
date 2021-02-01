@@ -27,7 +27,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Rw</label>
-                        <input type="text" name="nama"  value="{{$rw->nama}}" class="form-control" id="">
+                        <input type="number" name="nama_rw"  value="{{$rw->nama_rw}}" class="form-control" id="">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

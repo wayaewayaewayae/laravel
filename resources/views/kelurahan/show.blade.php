@@ -26,6 +26,10 @@
                         <label for="" class="form-label">Kelurahan</label>
                         <input type="text" name="nama_kelurahan"  value="{{$kelurahan->nama_kelurahan}}" class="form-control" id="" readonly>
                     </div>
+                    </div>
+                        <div class ="form-group">
+                        <a href="{{route('kelurahan.index')}}" class = "btn btn-primary btn-primary btn-block">Kembali</a>
+                    </div>
                 </div>
             </div>
         </div>

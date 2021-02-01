@@ -62,7 +62,7 @@
                 <select wire:model="selectedState5" class="form-control" name="id_rw">
                     <option value="" selected>Pilih Rw</option>
                     @foreach($rw as $data5)
-                        <option value="{{ $data5->id }}">{{ $data5->nama}}</option>
+                        <option value="{{ $data5->id }}">{{ $data5->nama_rw}}</option>
                     @endforeach
                 </select>
             </div>

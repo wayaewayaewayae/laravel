@@ -24,7 +24,7 @@
                         <label for="" class="form-label">Provinsi</label>
                         <input type="text" name="nama_provinsi" value="{{$provinsi->nama_provinsi}}" class="form-control" id="">
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
                 </div>
             </div>
