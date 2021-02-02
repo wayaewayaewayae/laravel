@@ -42,5 +42,4 @@ use App\Http\Controllers\KasusController;
 Route::resource('kasus', KasusController::class);
 
 // livewire
-
 Route::view('states-city','livewire.home');
