@@ -32,41 +32,46 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Local
+               Tracking COVID-19 Local
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/provinsi" class="nav-link active">
+                <a href="/provinsi" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Provinsi</p>
                 </a>
               </li>
+              <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/kota" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kota</p>
                 </a>
               </li>
+              <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/kecamatan" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kecamatan</p>
                 </a>
               </li>
+              <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/kelurahan" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Desa/Kelurahan</p>
                 </a>
               </li>
+              <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/rw" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rw</p>
                 </a>
               </li>
+              <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/kasus2" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
