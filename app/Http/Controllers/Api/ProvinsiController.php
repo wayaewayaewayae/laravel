@@ -5,10 +5,124 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Provinsi;
-use Validator; 
+use Carbon\Carbon;
+use DB; 
 
 class ProvinsiController extends Controller
 {
+
+
+    public function provinsi()
+    {
+        $provinsi = DB::table('provinsis')
+                    ->select('provinsis.nama_provinsi','provinsis.kode_provinsi',
+                    DB::raw('SUM(kasuses.positif) as Positif'),
+                    DB::raw('SUM(kasuses.sembuh) as Sembuh'),
+                    DB::raw('SUM(kasuses.meninggal) as Meninggal'))
+                        ->join('kotas','provinsis.id','=', 'kotas.id_provinsi')
+                        ->join('kecamatans','kota.id','=', 'kecamatans.id_kota')
+                        ->join('desas','kecamatans.id','=', 'desas.id_kecamatan')
+                        ->join('rws','desas.id','=', 'rws.id_desa')
+                        ->join('kasuses','rws.id','=', 'kasuses.id_rw')
+                        ->whereDate('kasuses.tanggal', Carbon::today())
+                        ->groupBy('provinsis.id')
+                        ->get();
+                        return response()->json([
+                            'success' => true,
+                            'data'    => [
+                                'hari_ini' => $provinsi
+                            ]
+                            ], 200);
+    }
+
+    public function showProvinsi($id)
+    {
+        $provinsi = DB::table('provinsis')
+                    ->select('provinsis.nama_provinsi','provinsis.kode_provinsi',
+                    DB::raw('SUM(kasuses.positif) as Positif'),
+                    DB::raw('SUM(kasuses.sembuh) as Sembuh'),
+                    DB::raw('SUM(kasuses.meninggal) as Meninggal'))
+                        ->join('kotas','provinsis.id','=', 'kotas.id_provinsi')
+                        ->join('kecamatans','kota.id','=', 'kecamatans.id_kota')
+                        ->join('desas','kecamatans.id','=', 'desas.id_kecamatan')
+                        ->join('rws','desas.id','=', 'rws.id_desa')
+                        ->join('kasuses','rws.id','=', 'kasuses.id_rw')
+                        ->where('provinsis.id',$id)
+                        ->groupBy('provinsis.id')
+                        ->get();
+                    return response()->json([
+                        'success' => true,
+                        'data'    => [
+                            'hari_ini' => $today
+                        ]
+                        ], 200);
+    }
+    public function kota()
+    {
+        //Data Kota 
+        $data = DB::table('kotas')
+        ->join('kecamatans','kecamatans.id_kota', '=', 'kotas.id')
+        ->join('desas','desas.id_kecamatan', '=', 'kecamatans.id')
+        ->join('rws','rws.id_desa', '=', 'desas.id')
+        ->join('kasuses','kasuses.id_rw', '=', 'rws.id')
+        ->select('nama_kota',
+        DB::raw('sum(kasuses.positif) as positif'),
+        DB::raw('sum(kasuses.meninggal) as meninggal'),
+        DB::raw('sum(kasuses.sembuh) as sembuh'))
+        ->groupBy('nama_kota')
+        ->get();
+                $res = [
+                    'succsess' => true,
+                    'Data' => $data,
+                    'message' => 'Data Kasus Di Tampilkan'
+                ];
+                return response()->json($res,200);
+    }
+    public function desa()
+    {
+        //Data Kota 
+        $data = DB::table('desas')
+        ->join('rws','rws.id_desa', '=', 'desas.id')
+        ->join('kasuses','kasuses.id_rw', '=', 'rws.id')
+        ->select('nama_desa',
+        DB::raw('sum(kasuses.positif) as positif'),
+        DB::raw('sum(kasuses.meninggal) as meninggal'),
+        DB::raw('sum(kasuses.sembuh) as sembuh'))
+        ->groupBy('nama_desa')
+        ->get();
+                $res = [
+                    'succsess' => true,
+                    'Data' => $data,
+                    'message' => 'Data Kasus Di Tampilkan'
+                ];
+                return response()->json($res,200);
+    }
+
+    public function indonesia()
+    {
+      
+
+        //Data SeIndonesia
+        $positif = DB::table('rws')
+        ->select('kasuses.positif','kasuses.meninggal','kasuses.sembuh')->join('kasuses',
+                'rws.id', '=', 'kasuses.id_rw')->sum('kasuses.positif');
+        $meninggal = DB::table('rws')
+        ->select('kasuses.positif','kasuses.meninggal','kasuses.sembuh')->join('kasuses',
+                'rws.id', '=', 'kasuses.id_rw')->sum('kasuses.meninggal');
+        $sembuh = DB::table('rws')
+        ->select('kasuses.positif','kasuses.meninggal','kasuses.sembuh')->join('kasuses',
+                'rws.id', '=', 'kasuses.id_rw')->sum('kasuses.sembuh');
+
+                $res = [
+                    'succsess' => true,
+                    'Data' => 'Data Kasus Indonesia',
+                    'Jumlah Positif' => $positif,
+                    'Jumlah Meninggal' => $meninggal,
+                    'Jumlah Sembuh' => $sembuh,
+                    'message' => 'Data Kasus Di Tampilkan'
+                ];
+                return response()->json($res,200);
+    }
     
     public function index()
     {
@@ -124,4 +238,4 @@ class ProvinsiController extends Controller
             ], 500);
         }
     }
-    }
+}

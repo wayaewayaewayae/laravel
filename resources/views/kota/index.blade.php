@@ -19,9 +19,9 @@
                     <thead>
                       <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Provinsi</th>
                         <th scope="col">Kode Kota</th>
                         <th scope="col">Nama Kota</th>
+                        <th scope="col">Provinsi</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -30,9 +30,9 @@
                     @foreach($kota as $data)
                       <tr>
                         <th scope="row">{{$no++}}</th>
-                        <td>{{$data->provinsi->nama_provinsi}}</td>
                         <td>{{$data->kode_kota}}</td>
                         <td>{{$data->nama_kota}}</td>
+                        <td>{{$data->provinsi->nama_provinsi}}</td>
                         <form action="{{route('kota.destroy', $data->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
