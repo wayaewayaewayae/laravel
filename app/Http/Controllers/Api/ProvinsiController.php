@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Provinsi;
@@ -9,10 +9,34 @@ use App\Models\Kota;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Rw;
+use GuzzleHttp\Client;
 use Carbon\Carbon;
 use DB;
+
 class ProvinsiController extends Controller
 {
+    public $data = [];
+     
+   public function global()
+   {     
+    $global = Http::get('https://api.kawalcorona.com/')->json();
+    foreach ($global as $data => $value) {
+        $raw = $value['attributes'];
+        $response = [
+            'Negara' => $raw['Country_Region'],
+            'Positif' => $raw['Confirmed'],
+            'Sembuh' => $raw['Recovered'],
+            'Meninggal' => $raw['Deaths']
+        ]; array_push ($this->data, $response);
+    }
+    $data = [
+        'success' => true,
+        'data'    => $this->data,
+        'message' => 'Menampilkan Global'
+    ];
+    return response()->json($data, 200);
+}
+
     public function provinsi()
     {
         $allDay = DB::table('provinsis')
@@ -253,26 +277,4 @@ class ProvinsiController extends Controller
             return response()->json($indonesia, 200);            
     }
 
-    public $data = [];
-     public function global()
-     {
-        $response = Http::get('https://api.PRAKERIN.com/')->json();
-        //dd($response);
-        foreach ($response as $data =>$val){
-            $raw = $val['attributes'];
-            $res = [   
-                'Negara' => $raw['Country_Region'],
-                'Positif' => $raw['Confirmed'],
-                'Sembuh' => $raw['Recovered'],
-                'Meninggal' => $raw['Deaths']
-            ]; 
-            array_push ($this->data, $res);
-        }
-        $data = [
-            'success' => true,
-            'data' => $this->data,
-            'message' => 'Data Berhasil'
-        ];
-        return response()->json($data,200);
-     }
-}
+};

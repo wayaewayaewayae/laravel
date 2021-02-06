@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\Api\ProvinsiController;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +39,5 @@ Route::get('/kota', [ProvinsiController::class,'kota']);
 Route::get('/kecamatan', [ProvinsiController::class,'kecamatan']);
 Route::get('/kelurahan', [ProvinsiController::class,'kelurahan']);
 Route::get('/rw', [ProvinsiController::class,'rw']);
+
 Route::get('/global', [ProvinsiController::class,'global']);
