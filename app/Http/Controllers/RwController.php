@@ -20,9 +20,6 @@ class RwController extends Controller
     }
     public function store(Request $request)
     {
-
-    
-
         $rw = new Rw;
         $rw->id_kelurahan = $request->id_kelurahan;
         $rw->nama_rw = $request->nama_rw;

@@ -35,9 +35,9 @@ Route::post('/posts/store', [PostsController::class, 'store']);
 Route::get('/posts/{id}', [PostsController::class, 'show']);
 Route::put('/posts/update/{id}', [PostsController::class, 'update']);
 Route::delete('/posts/{id?}', [PostsController::class, 'destroy']);
-Route::get('/kota', [ProvinsiController::class,'kota']);
-Route::get('/kecamatan', [ProvinsiController::class,'kecamatan']);
-Route::get('/kelurahan', [ProvinsiController::class,'kelurahan']);
-Route::get('/rw', [ProvinsiController::class,'rw']);
+Route::get('/kota', [ProvinsiController::class, 'kota']);
+Route::get('/kecamatan', [ProvinsiController::class, 'kecamatan']);
+Route::get('/kelurahan', [ProvinsiController::class, 'kelurahan']);
+Route::get('/rw', [ProvinsiController::class, 'rw']);
 
-Route::get('/global', [ProvinsiController::class,'global']);
+Route::get('/global', [ProvinsiController::class, 'global']);
