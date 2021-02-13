@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontendController;
 
 
 
@@ -43,3 +44,10 @@ Route::resource('kasus', KasusController::class);
 
 // livewire
 Route::view('states-city','livewire.home');
+
+//frondend
+use App\Http\Controllers\FrondendController;
+Route::resource('frondend', FrondendController::class);
+
+Route::view('admin','welcome');
+
