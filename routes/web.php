@@ -45,9 +45,7 @@ Route::resource('kasus', KasusController::class);
 // livewire
 Route::view('states-city','livewire.home');
 
-//frondend
-use App\Http\Controllers\FrondendController;
-Route::resource('frondend', FrondendController::class);
-
-Route::view('admin','welcome');
+//Frontand
+use App\Http\Controllers\frontandController;
+Route::resource('/welcome',frontandController::class);
 
