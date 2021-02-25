@@ -79,9 +79,9 @@
                                     <li><a href="#data">Data</a></li>
                                     <li><a href="#gejala">Gejala Terinfeksi</a></li>
                                     <li><a href="#welcome" class="logo_midle"></a></li>
-                                    <li><a href="news.html">Pencegahan</a></li>
-                                    <li><a href="doctores.html">Tentang</a></li>
-                                    <li><a href="contact.html">Contact </a></li>
+                                    <li><a href="#pencegahan">Pencegahan</a></li>
+                                    <li><a href="#tentang">Tentang</a></li>
+                                    <li><a href="#contact">Contact </a></li>
                                 </ul>
                                 <button class="nav-toggler">
                                     <span></span>
@@ -339,22 +339,68 @@
             </div>
             </section>
             <!-- end data kasus global -->
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <!-- coronata -->
             <section name="gejala" id="gejala">
                 <div class="coronata">
                     <div class="container">
                         <div class="row d_flex grid">
                             <div class="col-md-7">
-                                <div class="coronata_img text_align_center">
+                                <div class="">
                                     <figure><img src="asfrontand/images/corona.png" alt="#" /></figure>
                                 </div>
                             </div>
                             <div class="col-md-5 oder1">
                                 <div class="titlepage text_align_left">
-                                    <h2>Coronavirus what it is?</h2>
-                                    <p>when looking at its layout. The point of using Lorem Ipsum is that it has a
-                                        more-or-less
-                                        normal distribution of letters, as opposed to using
+                                    <h2><b>Berikut Gejala Virus Covid-19</b></h2>
+                                    <p>Masing-masing orang memiliki respons yang berbeda terhadap COVID-19. Sebagian
+                                        besar orang yang terpapar virus ini akan mengalami gejala ringan hingga sedang,
+                                        dan akan pulih tanpa perlu dirawat di rumah sakit.
+                                        <br>
+                                        <b>Gejala yang paling umum:</b>
+                                        <br>
+                                        - Demam
+                                        <br>
+                                        - Batuk kering
+                                        <br>
+                                        - Kelelahan
+                                        <br>
+                                        <b>Gejala yang sedikit tidak umum:</b>
+                                        <br>
+                                        - Rasa tidak nyaman dan nyeri
+                                        <br>
+                                        - Nyeri tenggorokan
+                                        <br>
+                                        - Diare
+                                        <br>
+                                        - Konjungtivitis (mata merah)
+                                        <br>
+                                        - Sakit kepala
+                                        <br>
+                                        - Hilangnya indera perasa atau penciuman
+                                        <br>
+                                        - Ruam pada kulit, atau perubahan warna pada jari tangan atau jari kaki
+                                        <br>
+                                        <b>Gejala serius:</b>
+                                        <br>
+                                        - Kesulitan bernapas atau sesak napas
+                                        <br>
+                                        - Nyeri dada atau rasa tertekan pada dada
+                                        <br>
+                                        - Hilangnya kemampuan berbicara atau bergerak
+                                        <br>
+                                        Segera cari bantuan medis jika Anda mengalami gejala serius. Selalu hubungi
+                                        dokter atau fasilitas kesehatan yang ingin Anda tuju sebelum mengunjunginya.
+                                        Orang dengan gejala ringan yang dinyatakan sehat harus melakukan perawatan
+                                        mandiri di rumah.
+                                        Rata-rata gejala akan muncul 5–6 hari setelah seseorang pertama kali terinfeksi
+                                        virus ini, tetapi bisa juga 14 hari setelah terinfeksi.
                                     </p>
 
                                 </div>
@@ -365,99 +411,100 @@
             </section>
             <!-- end coronata -->
 
-            <!-- protect -->
-
             <!-- end protect -->
 
             <!--  footer -->
-            <footer>
-                <div class="footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-2 col-md-6 col-sm-6">
-                                <div class="hedingh3 text_align_left">
-                                    <h3>Resources</h3>
-                                    <ul class="menu_footer">
-                                        <li><a href="#welcome">Home</a>
-                                        <li>
-                                        <li><a href="javascript:void(0)">What we do</a>
-                                        <li>
-                                        <li> <a href="javascript:void(0)">Media</a>
-                                        <li>
-                                        <li> <a href="javascript:void(0)">Travel Advice</a>
-                                        <li>
-                                        <li><a href="javascript:void(0)">Protection</a>
-                                        <li>
-                                        <li><a href="javascript:void(0)">Care</a>
-                                        <li>
-                                    </ul>
+            <section name="contact" id="contact">
+                <footer>
+                    <div class="footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-6 col-sm-6">
+                                    <div class="hedingh3 text_align_left">
+                                        <h3>Resources</h3>
+                                        <ul class="menu_footer">
+                                            <li><a href="#welcome">Home</a>
+                                            <li>
+                                            <li><a href="javascript:void(0)">What we do</a>
+                                            <li>
+                                            <li> <a href="javascript:void(0)">Media</a>
+                                            <li>
+                                            <li> <a href="javascript:void(0)">Travel Advice</a>
+                                            <li>
+                                            <li><a href="javascript:void(0)">Protection</a>
+                                            <li>
+                                            <li><a href="javascript:void(0)">Care</a>
+                                            <li>
+                                        </ul>
 
 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="hedingh3 text_align_left">
-                                    <h3>About</h3>
-                                    <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as
-                                        their
-                                        default model text, and a search for 'lorem ipsum' will uncover many web
-                                        sites still
-                                        in
-                                        their infancy. Various</p>
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                    <div class="hedingh3 text_align_left">
+                                        <h3>About</h3>
+                                        <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as
+                                            their
+                                            default model text, and a search for 'lorem ipsum' will uncover many web
+                                            sites still
+                                            in
+                                            their infancy. Various</p>
+                                    </div>
                                 </div>
-                            </div>
 
 
 
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="hedingh3  text_align_left">
-                                    <h3>Contact Us</h3>
-                                    <ul class="top_infomation">
-                                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>
-                                            Making this the first true
-                                        </li>
-                                        <li><i class="fa fa-phone" aria-hidden="true"></i>
-                                            Call : +01 1234567890
-                                        </li>
-                                        <li><i class="fa fa-envelope" aria-hidden="true"></i>
-                                            <a href="Javascript:void(0)">Email : demo@gmail.com</a>
-                                        </li>
-                                    </ul>
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                    <div class="hedingh3  text_align_left">
+                                        <h3>Contact Us</h3>
+                                        <ul class="top_infomation">
+                                            <li><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                Making this the first true
+                                            </li>
+                                            <li><i class="fa fa-phone" aria-hidden="true"></i>
+                                                Call : +01 1234567890
+                                            </li>
+                                            <li><i class="fa fa-envelope" aria-hidden="true"></i>
+                                                <a href="Javascript:void(0)">Email : demo@gmail.com</a>
+                                            </li>
+                                        </ul>
 
 
+                                    </div>
                                 </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="hedingh3 text_align_left">
+                                        <h3>countrys</h3>
+                                        <div class="map">
+                                            <img src="asfrontand/images/map.png" alt="#" />
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="hedingh3 text_align_left">
-                                    <h3>countrys</h3>
-                                    <div class="map">
-                                        <img src="asfrontand/images/map.png" alt="#" />
+                        </div>
+                        <div class="copyright">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8 offset-md-2">
+                                        <p>© 2020 All Rights Reserved. Design by <a href="https://html.design/"> Free
+                                                html
+                                                Templates</a></p>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end footer -->
+                <!-- Javascript files-->
+                <script src="asfrontand/js/jquery.min.js"></script>
+                <script src="asfrontand/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+                <script src="asfrontand/js/owl.carousel.min.js"></script>
+                <script src="asfrontand/js/custom.js"></script>
 
-                        </div>
-                    </div>
-                    <div class="copyright">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-8 offset-md-2">
-                                    <p>© 2020 All Rights Reserved. Design by <a href="https://html.design/"> Free
-                                            html
-                                            Templates</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end footer -->
-            <!-- Javascript files-->
-            <script src="asfrontand/js/jquery.min.js"></script>
-            <script src="asfrontand/js/bootstrap.bundle.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
-            <script src="asfrontand/js/owl.carousel.min.js"></script>
-            <script src="asfrontand/js/custom.js"></script>
+            </section>
     </body>
 
 </html>
