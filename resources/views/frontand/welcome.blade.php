@@ -431,7 +431,7 @@
         </div>
         </section>
         <!-- end pencegahan -->
-    @endsection
+    
     <!-- end protect -->
     <!-- Tentang -->
     <section id="tentang" name="tentang">

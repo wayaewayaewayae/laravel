@@ -77,15 +77,20 @@ class ProvinsiController extends Controller
                     ->sum('kasus2s.jumlah_meninggal');
             
         $data = [
+            [
                 'success' => true,
                 'Data' => [
                     ['Hari ini' => $today,
                     'Semua' => $allDay],
                 ],
+            ],
+            [
+    
                 'Total' => [
                     'Positif' => $positif,
                     'Sembuh' => $sembuh,
                     'Meninggal' => $meninggal
+                ],
                 ],
         ];    
         return response()->json($data, 200);        
@@ -135,8 +140,9 @@ class ProvinsiController extends Controller
         ->get();
                 $res = [
                     'succsess' => true,
-                    'Data' => $data,
+                    'Data' => [$data,
                     'message' => 'Data Kasus Di Tampilkan'
+                ],
                 ];
                 return response()->json($res,200);
     }
@@ -156,8 +162,9 @@ class ProvinsiController extends Controller
         ->get();
                 $res = [
                     'succsess' => true,
-                    'Data' => $data,
+                    'Data' => [ $data,
                     'message' => 'Data Kasus Di Tampilkan'
+                ],
                 ];
                 return response()->json($res,200);
     }
@@ -176,8 +183,10 @@ class ProvinsiController extends Controller
         ->get();
                 $res = [
                     'succsess' => true,
-                    'Data' => $data,
+                    'Data' => [
+                        $data,
                     'message' => 'Data Kasus Di Tampilkan'
+                ],
                 ];
                 return response()->json($res,200);
     }
@@ -194,8 +203,9 @@ class ProvinsiController extends Controller
         ->get();
                 $res = [
                     'succsess' => true,
-                    'Data' => $data,
+                    'Data' => [ $data,
                     'message' => 'Data Kasus Di Tampilkan'
+                ],
                 ];
                 return response()->json($res,200);
     }
@@ -219,12 +229,13 @@ class ProvinsiController extends Controller
 
 
            $res = [
+               [
                'success' => true,
                'Data' => 'Data Kasus Indonesia',
                'jumlah Positif' => $positif,
                'Jumlah Sembuh' => $sembuh,
                'jumlah Meninggal' => $meninggal,
-               'message' => 'Data Kasus Di tampilkan'
+               'message' => 'Data Kasus Di tampilkan'],
            ];
        return response()->json($res,200);
    }
@@ -238,7 +249,9 @@ class ProvinsiController extends Controller
             'success' => true,
             'data' => [
                     'name' => 'Jumlah Positif',
-                    'value' => $positif
+                    'value' =>[
+                        $positif
+                    ],
                 ],
                     'message' => 'Berhasil',
             ];
@@ -254,7 +267,9 @@ class ProvinsiController extends Controller
             'success' => true,
             'data' => [
                     'name' => 'Jumlah Sembuh',
-                    'value' => $sembuh
+                    'value' => [
+                     $sembuh
+                    ],
                 ],
                     'message' => 'Berhasil',
             ];
@@ -270,7 +285,9 @@ class ProvinsiController extends Controller
             'success' => true,
             'data' => [
                     'name' => 'Jumlah Meninggal',
-                    'value' => $meninggal
+                    'value' => [ 
+                        $meninggal
+                    ],
                 ],
                     'message' => 'Berhasil',
             ];

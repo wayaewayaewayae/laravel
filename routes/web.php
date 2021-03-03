@@ -46,6 +46,6 @@ Route::resource('kasus', KasusController::class);
 Route::view('states-city','livewire.home');
 
 //Frontand
-use App\Http\Controllers\frontandController;
-Route::resource('/welcome',frontandController::class);
+use App\Http\Controllers\FrontandController;
+Route::resource('/welcome',FrontandController::class);
 
